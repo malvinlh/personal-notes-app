@@ -1,5 +1,5 @@
 # personal-notes-app
-Final Project of the Belajar Membuat Aplikasi Web dengan React course on Dicoding Indonesia.
+Final Project for the Belajar Membuat Aplikasi Web dengan React course at Dicoding Indonesia.
 
 # How to Run?
 1. Open the project folder
