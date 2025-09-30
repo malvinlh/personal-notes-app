@@ -1,5 +1,5 @@
-# personal-notes-app
-Final Project for the Belajar Membuat Aplikasi Web dengan React course at Dicoding Indonesia.
+# personal-notes-app-spa-version
+Further development of the Personal Notes app from the main branch, adding several features such as multiple pages (a list page and a detail page accessible by URL path parameters), search with shareable query parameters, archive pages, and a custom 404 page.
 
 # How to Run?
 1. Open the project folder
