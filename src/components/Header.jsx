@@ -1,11 +1,23 @@
 import React from "react";
-import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
 
-export default function Header({ query, onChangeQuery }) {
+export default function Header() {
   return (
-    <header className="note-app__header">
+    <>
       <h1>Personal Notes</h1>
-      <SearchBar value={query} onChange={onChangeQuery} />
-    </header>
+      <nav className="navigation">
+        <ul>
+          <li>
+            <Link to="/">Beranda</Link>
+          </li>
+          <li>
+            <Link to="/archives">Arsip</Link>
+          </li>
+          <li>
+            <Link to="/notes/new">Tambah</Link>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }

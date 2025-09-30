@@ -1,58 +1,31 @@
-import React, { useMemo, useState } from "react";
-import { getInitialData } from "./utils";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import NoteInput from "./components/NoteInput";
-import NotesList from "./components/NoteList";
+import HomePage from "./pages/HomePage";
+import DetailPage from "./pages/DetailPage";
+import AddPage from "./pages/AddPage";
+import ArchivePage from "./pages/ArchivePage";
+import NotFound from "./pages/NotFound";
 
-export default function App() {
-  const [notes, setNotes] = useState(getInitialData());
-  const [query, setQuery] = useState("");
-
-  function addNote(newNote) {
-    setNotes((prev) => [newNote, ...prev]);
-  }
-
-  function deleteNote(id) {
-    setNotes((prev) => prev.filter((n) => n.id !== id));
-  }
-
-  function toggleArchive(id) {
-    setNotes((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, archived: !n.archived } : n))
-    );
-  }
-
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return notes;
-    return notes.filter((n) => n.title.toLowerCase().includes(q));
-  }, [notes, query]);
-
-  const activeNotes = filtered.filter((n) => !n.archived);
-  const archivedNotes = filtered.filter((n) => n.archived);
-
+function App() {
   return (
-    <>
-      <Header query={query} onChangeQuery={setQuery} />
-
-      <main className="note-app__body">
-        <h2>Tambah Catatan</h2>
-        <NoteInput onAdd={addNote} />
-
-        <NotesList
-          title="Catatan Aktif"
-          notes={activeNotes}
-          onDelete={deleteNote}
-          onToggleArchive={toggleArchive}
-        />
-
-        <NotesList
-          title="Arsip"
-          notes={archivedNotes}
-          onDelete={deleteNote}
-          onToggleArchive={toggleArchive}
-        />
-      </main>
-    </>
+    <div className="app-container">
+      <BrowserRouter>
+        <header>
+          <Header />
+        </header>
+        <main>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/notes/new" element={<AddPage />} />
+            <Route path="/notes/:id" element={<DetailPage />} />
+            <Route path="/archives" element={<ArchivePage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+      </BrowserRouter>
+    </div>
   );
 }
+
+export default App;
